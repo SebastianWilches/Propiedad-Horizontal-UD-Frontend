@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DropdownList from 'react-widgets/DropdownList';
 import 'react-widgets/styles.css';
 
+import './formRegistrarResidente.css';
+
 export default function FormRegistrarResidente() {
 
     const [residenteForm, setResidenteForm] = useState([
@@ -34,9 +36,12 @@ export default function FormRegistrarResidente() {
     }
 
     return (
-        <div>
+        <div className='containerForm'>
+            <h1>Propiedad horizontal <span className='enfasis'>UD</span> & Asociados</h1>
+
+            <h2>Registrar residentes de un apartamento</h2>
             <p>Apartamento: </p>
-            <DropdownList 
+            <DropdownList
                 value={Apartamento}
                 onChange={(nextValue) => setApartamento(nextValue)}
                 data={["101", "201", "301"]}
