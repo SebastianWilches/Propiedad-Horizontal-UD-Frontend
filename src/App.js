@@ -1,5 +1,5 @@
 import './App.css';
-import Responsable from './vistas/residentes/responsable/Responsable';
+import Residente from './vistas/residente/Residente';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/residente' element={<Responsable />} />
+          <Route path='/residente' element={<Residente />} />
         </Routes>
       </BrowserRouter>
     </>
