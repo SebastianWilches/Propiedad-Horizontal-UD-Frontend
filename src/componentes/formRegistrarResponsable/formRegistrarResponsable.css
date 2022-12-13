@@ -1,0 +1,45 @@
+.containerFormResponsable {
+    background-color: var(--container);
+    width: 50%;
+    height: auto;
+    margin: 100px auto;
+
+    /* padding: 10rem; */
+    padding: 2rem;
+
+    border-radius: 18px 18px 18px 18px;
+    -moz-border-radius: 18px 18px 18px 18px;
+    -webkit-border-radius: 18px 18px 18px 18px;
+    border: 0px solid #000000;
+
+    -webkit-box-shadow: 0px 0px 38px -4px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 38px -4px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 38px -4px rgba(0, 0, 0, 1);
+}
+
+.formLogin {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 1rem;
+}
+.formLogin >p{
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.login-input {
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.login-boton{
+    border: none;
+    font-size: 1rem;
+    padding: 1.0rem;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 1rem;
+    border-radius: 30px;
+    margin: auto;
+}
