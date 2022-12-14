@@ -39,9 +39,35 @@ export default function FormRegistrarResponsable() {
   const handleSendResponsable = (e) => {
     e.preventDefault();
     let responsableCompleto;
+    persona.k_numero = Number(persona.k_numero);
+    persona.o_telefono = Number(persona.o_telefono);
+    if(responsable.es_propietario == 1){
+      responsable.es_propietario = true;  
+    }else{
+      responsable.es_propietario = false;
+    }
+    responsable.es_propietario = true;
+    responsable.o_tel_residencia = Number(responsable.o_tel_residencia);
+    responsable.o_tel_trabajo = Number(responsable.o_tel_trabajo);
     responsableCompleto = { persona, responsable, apartamento };
     console.log(responsableCompleto);
-    //sendResponsable(responsableCompleto);
+    sendResponsable(responsableCompleto);
+  };
+
+  const sendResponsable = async (object) => {
+    console.log("AQUI ESTA EL OBJETOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    console.log(object);
+    const response = await fetch(
+      "http://localhost:8081/persona/save_persona_responsable",
+      {
+        method: "POST",
+        body: JSON.stringify(object),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
   };
 
   return (
@@ -55,7 +81,7 @@ export default function FormRegistrarResponsable() {
       <DropdownList
         value={apartamento}
         onChange={(nextValue) => setApartamento(nextValue)}
-        data={["101", "201", "301"]}
+        data={[101, 201, 103]}
       />
       <form className="formLogin" onSubmit={handleSendResponsable}>
         <p>Numero de Documento: </p>
@@ -110,7 +136,7 @@ export default function FormRegistrarResponsable() {
         <p>Es el propietario: </p>
         <input
           className="login-input"
-          type="text"
+          type="number"
           name="es_propietario"
           onChange={handleResponsable}
         />
