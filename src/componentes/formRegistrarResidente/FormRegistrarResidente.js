@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DropdownList from 'react-widgets/DropdownList';
 import 'react-widgets/styles.css';
 
 import './formRegistrarResidente.css';
 
-export default function FormRegistrarResidente() {
+export default function FormRegistrarResidente({ apartamentos }) {
 
     const [residenteForm, setResidenteForm] = useState([
         { k_numero: '', tipo: '', n_nombre: '', n_apellido: '', o_telefono: '', i_genero: '' }
     ])
-    const [Apartamento, setApartamento] = useState("# Apartamento");
+    const [AptoDropdown, setAptoDropdown] = useState("# Apartamento");
+
+
 
 
     const handleFormChange = (index, event) => {
@@ -19,20 +21,46 @@ export default function FormRegistrarResidente() {
     }
 
     const addFields = () => {
-        let inputForm = { name: '', age: '' }
+        let inputForm = { k_numero: '', tipo: '', n_nombre: '', n_apellido: '', o_telefono: '', i_genero: '' }
 
         setResidenteForm([...residenteForm, inputForm])
     }
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(residenteForm)
+
+        residenteForm.forEach(element => {
+            element.k_numero = Number(element.k_numero);
+            element.o_telefono = Number(element.o_telefono);
+        });
+
+        const postResidentes = {
+            residentes: residenteForm,
+            k_apartamento: AptoDropdown
+        }
+
+        console.log(postResidentes)
+        POSTResidente(postResidentes);
     }
 
     const removeFields = (index) => {
         let data = [...residenteForm];
         data.splice(index, 1)
         setResidenteForm(data)
+    }
+
+    const POSTResidente = async (object) => {
+        const url = 'http://localhost:8081/persona/save_persona_residente'
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(object),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const data = await response.json();
+        console.log(data);
     }
 
     return (
@@ -42,9 +70,11 @@ export default function FormRegistrarResidente() {
             <h2>Registrar residentes de un apartamento</h2>
             <p>Apartamento: </p>
             <DropdownList
-                value={Apartamento}
-                onChange={(nextValue) => setApartamento(nextValue)}
-                data={["101", "201", "301"]}
+                dataKey="k_APARTAMENTO"
+                textField="k_APARTAMENTO"
+                value={AptoDropdown}
+                onChange={(nextValue) => setAptoDropdown(nextValue.k_APARTAMENTO)}
+                data={apartamentos}
             />
             <hr></hr>
 
