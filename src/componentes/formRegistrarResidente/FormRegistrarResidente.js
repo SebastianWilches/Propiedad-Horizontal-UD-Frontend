@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DropdownList from 'react-widgets/DropdownList';
 import 'react-widgets/styles.css';
+import Swal from 'sweetalert2';
 
 import './formRegistrarResidente.css';
 
@@ -41,6 +42,8 @@ export default function FormRegistrarResidente({ apartamentos }) {
 
         console.log(postResidentes)
         POSTResidente(postResidentes);
+
+        successOrder();
     }
 
     const removeFields = (index) => {
@@ -61,6 +64,15 @@ export default function FormRegistrarResidente({ apartamentos }) {
 
         const data = await response.json();
         console.log(data);
+    }
+
+    //Alert
+    const successOrder = () =>{
+        Swal.fire({
+            title: "¡Residentes registrados!",
+            icon: "success",
+            button: "Aww yiss!",
+          });
     }
 
     return (

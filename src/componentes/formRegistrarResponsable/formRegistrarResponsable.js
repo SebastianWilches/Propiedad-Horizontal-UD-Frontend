@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DropdownList from "react-widgets/DropdownList";
 import "react-widgets/styles.css";
+import Swal from 'sweetalert2';
 
 import "./formRegistrarResponsable.css";
 
@@ -52,6 +53,8 @@ export default function FormRegistrarResponsable({ apartamentos }) {
     responsableCompleto = { persona, responsable, apartamento:Number(AptoDropdown) };
     console.log(responsableCompleto);
     sendResponsable(responsableCompleto);
+
+    successOrder();
   };
 
   const sendResponsable = async (object) => {
@@ -66,7 +69,18 @@ export default function FormRegistrarResponsable({ apartamentos }) {
       }
     );
     const data = await response.json();
+    console.log(data);
   };
+
+
+  //Alert
+  const successOrder = () =>{
+    Swal.fire({
+        title: "¡Responsable registrado!",
+        icon: "success",
+        button: "Aww yiss!",
+      });
+}
 
   return (
     <div className="containerFormResponsable">
